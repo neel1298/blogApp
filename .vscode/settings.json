@@ -1,0 +1,11 @@
+{
+    "editor.fontSize": 16,
+    "git.ignoreLimitWarning": true,
+    
+
+
+"python.linting.pylintArgs": [
+    "--load-plugins=pylint_django",
+    "--errors-only"
+]
+}

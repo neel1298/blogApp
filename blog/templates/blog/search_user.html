@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+    {% if allUserPost  %}
+    {% for post in allUserPost %}
+        <article class="media content-section">
+          <div class="media-body">
+             
+            <div class="article-metadata">
+              <a class="mr-2" href="{% url 'user-posts' post.author_id %}">{{ post.author }}</a>
+              <small class="text-muted">{{ post.date_posted }}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+          </div>
+        </article>
+        
+    {% endfor %}
+    {% else %}
+    <h1>No Post from the User</h1>
+    {% endif %}
+
+{% endblock content %}
