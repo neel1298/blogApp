@@ -13,7 +13,7 @@
             <div class="card-body">  
               {% if posts  %}
               {% for post in posts %}
-                <form action="" method="POST"  id="create_post">
+                <form action="" method="POST"  id="update_post">
                   {% csrf_token %}   
                 <div class="form-group">
                   <input type="hidden" value="{{ user.id }}" name="user_id" id="user_id" />  
@@ -39,7 +39,7 @@
                 <label for="blog-content">Blog Content</label>
                 <textarea rows = "5" cols = "1000"  name="blog-content" id="blog-content" class="form-control" required>{{post.content}}</textarea>
               </div>
-              <input type="submit" value="Create Post" class="btn btn-success btn-block">
+              <input type="submit" value="Create Post" class="btn btn-success btn-block" id="create-user-post" >
             </form>
               {% endif %}
             </div>
@@ -48,23 +48,5 @@
       </div>
     </div>
   </section>
-<!---
-<div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
-                {{ form }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign Up</button>
-            </div>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Already Have An Account? <a class="ml-2" href="#">Sign In</a>
-            </small>
-        </div>
-    </div>
----->
+
 {% endblock content %}

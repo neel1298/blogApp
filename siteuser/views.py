@@ -53,21 +53,28 @@ def logout(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-        user_id = request.POST['user_id']
-        new_username = request.POST['username']
-        new_email = request.POST['email']
+        if request.POST['user_id'] != "" or request.POST['username'] != "":
+            user_id = request.POST['user_id']
+            new_username = request.POST['username']
+            new_email = request.POST['email']
+            
+            new_User= User.objects.get(pk= user_id)
+            new_User.username = new_username
+            new_User.email = new_email
+            new_User.save()
         imageurl = request.FILES.get('profile_pic')
-        new_User= User.objects.get(pk= user_id)
-        new_User.username = new_username
-        new_User.email = new_email
-
-        new_User.save()
-        if imageurl is not None:
+        new_image.image = 'user_profile_pics/%s/%s'%(user_id,imageurl)
+        UserProfile.save(new_User,n)
+        new_image=UserProfile.objects.get(user_id=user_id)
+        new_image.user_id = user_id
+        
+        new_image.save()
+        ''' if imageurl is not None:
             new_image=UserProfile.objects.get(user_id=user_id)
             new_image.delete()
             new_image.user_id = user_id
             new_image.image = 'user_profile_pics/%s/%s'%(user_id,imageurl)
-            new_image.save()
+            new_image.save() '''
         return HttpResponseRedirect(request.path_info)
 
     return render(request,'siteuser/profile.html')

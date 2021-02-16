@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView,DetailView
 from  .models import post
@@ -27,12 +27,12 @@ class PostDetailView(DetailView):
 
 def createPost(request):
     if request.method == 'POST':
-        title = request.POST['blog-title']
-        content = request.POST['blog-content']
-        author_id = request.POST['user_id']
+        title = request.POST['blogTitle']
+        content = request.POST['blogContent']
+        author_id = request.POST['authId']
         new_post = post.objects.create(title=title,content=content,author_id=author_id)
         new_post.save()
-        return redirect('blog-home')
+        return JsonResponse({'msg':'Success'})
     
     return render(request,'blog/update_post.html')  
 
